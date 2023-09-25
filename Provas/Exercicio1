@@ -1,1 +1,33 @@
+import java.util.Scanner;
+public class avaliacao1 {
+    public static void main(String[] args) {
+        Scanner tec = new Scanner(System.in);
+        
+        System.out.print("Digite a hora de início da partida (0-23): ");
+        int horaInicio = tec.nextInt();
+        System.out.print("Digite o minuto de início da partida (0-59): ");
+        int minutoInicio = tec.nextInt();
 
+        System.out.print("Digite a hora de fim da partida (0-23): ");
+        int horaFim = tec.nextInt();
+        System.out.print("Digite o minuto de fim da partida (0-59): ");
+        int minutoFim = tec.nextInt();
+        int duracaoHoras = horaFim - horaInicio;
+        int duracaoMinutos = minutoFim - minutoInicio;
+
+        if (duracaoMinutos > 0) {
+            duracaoHoras++;
+        }
+
+        double custoPorHora = 90.0;
+        double custoTotal = duracaoHoras * custoPorHora;
+
+        if (duracaoHoras > 3) {
+            custoTotal *= 0.9;
+        }
+
+        
+        System.out.println("Duração da partida: " + duracaoHoras + " horas e " + duracaoMinutos + " minutos.");
+        System.out.println("Total a ser pago: R$ " + custoTotal);
+    }
+}
