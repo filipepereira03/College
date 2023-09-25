@@ -1,1 +1,33 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class dados {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Random rand = new Random();
+        int numeroDesejado = 7;
+        int contador = 0;
+
+        char continuar;
+        do {
+            int dado1 = rand.nextInt(6) + 1;
+            int dado2 = rand.nextInt(6) + 1;
+            int soma = dado1 + dado2;
+
+            System.out.println("Dado 1: " + dado1);
+            System.out.println("Dado 2: " + dado2);
+            System.out.println("Soma: " + soma);
+
+            if (soma == numeroDesejado) {
+                contador++;
+            }
+
+            System.out.println("Você deseja continuar jogando? (s/n): ");
+            continuar = scanner.next().charAt(0);
+        } while (continuar == 's' || continuar == 'S');
+
+        System.out.println("Número desejado (7) foi obtido " + contador + " vezes.");
+        scanner.close();
+    }
+}
 
