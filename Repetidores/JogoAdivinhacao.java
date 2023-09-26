@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class JogoAdivinhacao {
 
     public static void main(String[] args) {
-        String palavraOculta = "programacao";
+        String palavraOculta = "jarjarbinks";
         int tentativasMaximas = 6;
         int tentativasRestantes = tentativasMaximas;
         StringBuilder palavraRevelada = new StringBuilder("_".repeat(palavraOculta.length()));
