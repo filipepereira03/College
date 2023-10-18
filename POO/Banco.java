@@ -1,55 +1,62 @@
 import java.util.Scanner;
-
 public class Banco {
     public static void main(String[] args) {
-        Scanner tec = new Scanner(System.in);
-        System.out.println("Digite seu saldo:");
-        double saldo = tec.nextDouble();
-        System.out.println("Digite o rendimento mensal:");
-        double rendimentoMensal = tec.nextDouble();
-        ContaBancária conta = new ContaBancária(saldo, rendimentoMensal);
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Informe o saldo inicial: ");
+        double saldoInicial = scanner.nextDouble();
+
+        System.out.print("Informe o rendimento mensal percentual: ");
+        double rendimentoMensalPercentual = scanner.nextDouble();
+
+        System.out.print("Informe o aporte mensal: ");
+        double aporteMensal = scanner.nextDouble();
+
+        ContaBancaria conta = new ContaBancaria(saldoInicial, rendimentoMensalPercentual);
 
         while (true) {
-            System.out.println("\n Bem-vindo ao banco");
+            System.out.println("\nEscolha uma opção:");
             System.out.println("1. Depósito");
             System.out.println("2. Saque");
-            System.out.println("3. Rendimento mensal");
-            System.out.println("4. Rendimento após n meses");
+            System.out.println("3. Calcular Rendimento Mensal");
+            System.out.println("4. Prever Rendimento Mensal com Aporte");
+            System.out.println("5. Prever Rendimento Mensal");
+            System.out.println("6. Sair");
 
-            int escolhaOpção = tec.nextInt();
+            int opcao = scanner.nextInt();
 
-            switch (escolhaOpção) {
+            switch (opcao) {
                 case 1:
-                    System.out.println("Digite o valor do depósito:");
-                    double deposito = tec.nextDouble();
-                    conta.deposito(deposito);
-                    System.out.println("Depósito realizado. Novo saldo: " + conta.getSaldo());
+                    System.out.print("Informe o valor a depositar: ");
+                    double valorDeposito = scanner.nextDouble();
+                    conta.depositar(valorDeposito);
                     break;
-
                 case 2:
-                    System.out.println("Digite o valor do saque:");
-                    double saque = tec.nextDouble();
-                    if (conta.sacar(saque)) {
-                        System.out.println("Saque realizado. Novo saldo: " + conta.getSaldo());
-                    } else {
-                        System.out.println("Saldo insuficiente para o saque.");
-                    }
+                    System.out.print("Informe o valor a sacar: ");
+                    double valorSaque = scanner.nextDouble();
+                    conta.sacar(valorSaque);
                     break;
                 case 3:
-                    System.out.println("Rendimento mensal: " + conta.calcularRendimento());
+                    conta.calcularRendimentoMensal();
                     break;
                 case 4:
-                    System.out.println("Digite o número de meses");
-                    int meses = tec.nextInt();
-                    System.out.println("Rendimento após " + meses + " meses " + conta.preverRendimento(meses));
+                    System.out.print("Informe o número de meses para prever o rendimento com aporte: ");
+                    int mesesComAporte = scanner.nextInt();
+                    double saldoComAporte = conta.preverRendimentoMensalComAporte(mesesComAporte, aporteMensal);
+                    System.out.println("Saldo previsto com aporte após " + mesesComAporte + " meses: R$" + saldoComAporte);
                     break;
                 case 5:
-                    System.exit(0);
-                    System.out.println("(:");
-                    return;
-                default:
-                    System.out.println("Opção inválida");
+                    System.out.print("Informe o número de meses para prever o rendimento sem aporte: ");
+                    int mesesSemAporte = scanner.nextInt();
+                    double saldoSemAporte = conta.preverRendimentoMensal(mesesSemAporte);
+                    System.out.println("Saldo previsto sem aporte após " + mesesSemAporte + " meses: R$" + saldoSemAporte);
                     break;
+                case 6:
+                    System.out.println("Encerrando o programa.");
+                    scanner.close();
+                    System.exit(0);
+                default:
+                    System.out.println("Opção inválida. Tente novamente.");
             }
         }
     }
